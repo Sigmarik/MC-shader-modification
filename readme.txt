@@ -1,3 +1,4 @@
+(original shader is made by author of Builder’s Quality of Life Shaders)
 Welcome! If you're reading this, then you probably want to edit my shader pack.
 I'm completely cool with this. In fact, to help you get started faster, here's an overview of how stuff works:
 If you're on an old version of minecraft and just want to know all the places where you need to change a specific option, you can skip to the options section below.

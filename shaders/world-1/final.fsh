@@ -76,7 +76,7 @@ void main() {
 				vec4 pix_col = texture2D(composite, pos);
 				float dist = sqrt(dx * dx + dy * dy);
 				pix_col *= pow(BLOOM_COLOREXPCONST, (3.0 - (pix_col.r + pix_col.g + pix_col.b)));
-				bloom_addition += pix_col * (1.0 / pow(BLOOM_DIVCONST, dist / BLOOM_DISTMUL));
+				bloom_addition = max(bloom_addition, pix_col * (1.0 / pow(BLOOM_DIVCONST, dist / BLOOM_DISTMUL)));
 			}
 		#endif
 

@@ -15,10 +15,17 @@ uniform float pixelSizeY;
 uniform float pixelSizeX;
 uniform float viewHeight;
 uniform sampler2D lightmap;
+uniform sampler2D gaux1;
+uniform sampler2D gaux2;
+uniform sampler2D gaux3;
+uniform sampler2D gaux4;
+uniform sampler2D colortex5;
 //const mat4 TEXTURE_MATRIX_2;
 uniform sampler2D composite; //output from previous stage
 
 varying vec2 texcoord;
+varying vec3 skyLightColor;
+varying float skyBrightness;
 
 float fogify(float x, float width) {
 	//fast, vaguely bell curve-shaped function with variable width
@@ -57,6 +64,17 @@ void main() {
 		float bloom_step_x = (bloom_radius * pixelSizeX * 2) / BLOOM_QUALITY;
 		float bloom_step_y = (bloom_radius * pixelSizeY * 2) / BLOOM_QUALITY;
 		
+		vec4 mean_color = vec4(0.0);
+		int n_samples = 1;
+		for (float x = 0; x <= 1.0; x += 0.9 / n_samples) {
+			for (float y = 0; y <= 1.0; y += 0.9 / n_samples) {
+				mean_color += texture2D(composite, vec2(x, y));
+			}
+		}
+		mean_color /= n_samples * n_samples;
+		float scene_ll = (mean_color.r + mean_color.g + mean_color.b) / 3;
+		scene_ll = 1;
+
 		#if BLOOM_SHAPE == 0
 			for (float x = texcoord.x - bloom_radius * pixelSizeX; x < texcoord.x + bloom_radius * pixelSizeX; x += bloom_step_x) {
 				float y = texcoord.y;
@@ -64,8 +82,10 @@ void main() {
 				float dx = (x - texcoord.x) / pixelSizeX;
 				float dy = (y - texcoord.y) / pixelSizeY;
 				vec4 pix_col = texture2D(composite, pos);
+				
 				float dist = sqrt(dx * dx + dy * dy);
-				pix_col *= pow(BLOOM_COLOREXPCONST, (3.0 - (pix_col.r + pix_col.g + pix_col.b)));
+				pix_col = pix_col * pix_col;
+				pix_col *= pow(BLOOM_COLOREXPCONST / scene_ll, (1.0 - texture2D(gaux4, pos).r + texture2D(gaux4, pos).g * skyBrightness));
 				bloom_addition = max(bloom_addition, pix_col * (1.0 / pow(BLOOM_DIVCONST, dist / BLOOM_DISTMUL)));
 			}
 			for (float y = texcoord.y - bloom_radius * pixelSizeY; y < texcoord.y + bloom_radius * pixelSizeY; y += bloom_step_y) {
@@ -74,9 +94,11 @@ void main() {
 				float dx = (x - texcoord.x) / pixelSizeX;
 				float dy = (y - texcoord.y) / pixelSizeY;
 				vec4 pix_col = texture2D(composite, pos);
+				
 				float dist = sqrt(dx * dx + dy * dy);
-				pix_col *= pow(BLOOM_COLOREXPCONST, (3.0 - (pix_col.r + pix_col.g + pix_col.b)));
-				bloom_addition += pix_col * (1.0 / pow(BLOOM_DIVCONST, dist / BLOOM_DISTMUL));
+				pix_col = pix_col * pix_col;
+				pix_col *= pow(BLOOM_COLOREXPCONST / scene_ll, (1.0 - texture2D(gaux4, pos).r + texture2D(gaux4, pos).g * skyBrightness));
+				bloom_addition = max(bloom_addition, pix_col * (1.0 / pow(BLOOM_DIVCONST, dist / BLOOM_DISTMUL)));
 			}
 		#endif
 
@@ -88,8 +110,10 @@ void main() {
 				float dx = (x - texcoord.x) / pixelSizeX;
 				float dy = (y - texcoord.y) / pixelSizeY;
 				vec4 pix_col = texture2D(composite, pos);
+				
 				float dist = sqrt(dx * dx + dy * dy);
-				pix_col *= pow(BLOOM_COLOREXPCONST, (3.0 - (pix_col.r + pix_col.g + pix_col.b)));
+				pix_col = pix_col * pix_col;
+				pix_col *= pow(BLOOM_COLOREXPCONST / scene_ll, (1.0 - texture2D(gaux4, pos).r + texture2D(gaux4, pos).g * skyBrightness));
 				bloom_addition = max(bloom_addition, pix_col * (1.0 / pow(BLOOM_DIVCONST, dist / BLOOM_DISTMUL)));
 			}
 			for (float delta = -0.5 * BLOOM_QUALITY; delta <= BLOOM_QUALITY / 2; delta += 1) {
@@ -99,8 +123,10 @@ void main() {
 				float dx = (x - texcoord.x) / pixelSizeX;
 				float dy = (y - texcoord.y) / pixelSizeY;
 				vec4 pix_col = texture2D(composite, pos);
+				
 				float dist = sqrt(dx * dx + dy * dy);
-				pix_col *= pow(BLOOM_COLOREXPCONST, (3.0 - (pix_col.r + pix_col.g + pix_col.b)));
+				pix_col = pix_col * pix_col;
+				pix_col *= pow(BLOOM_COLOREXPCONST / scene_ll, (1.0 - texture2D(gaux4, pos).r + texture2D(gaux4, pos).g * skyBrightness));
 				bloom_addition = max(bloom_addition, pix_col * (1.0 / pow(BLOOM_DIVCONST, dist / BLOOM_DISTMUL)));
 			}
 		#endif
@@ -112,14 +138,19 @@ void main() {
 					float dx = (x - texcoord.x) / pixelSizeX;
 					float dy = (y - texcoord.y) / pixelSizeY;
 					vec4 pix_col = texture2D(composite, pos);
+					
 					float dist = sqrt(dx * dx + dy * dy);
-					pix_col *= pow(BLOOM_COLOREXPCONST, (3.0 - (pix_col.r + pix_col.g + pix_col.b)));
+					pix_col = pix_col * pix_col;
+					pix_col *= pow(BLOOM_COLOREXPCONST / scene_ll, (1.0 - texture2D(gaux4, pos).r + texture2D(gaux4, pos).g * skyBrightness));
 					bloom_addition = max(bloom_addition, pix_col * (1.0 / pow(BLOOM_DIVCONST, dist / BLOOM_DISTMUL)));
 				}
 			}
 		#endif
 	#endif
 	//float dst = sqrt(texcoord.x * texcoord.x + texcoord.y * texcoord.y);
+	//gl_FragColor = texture2D(gaux4, texcoord); //gaux1
+	//gl_FragColor = vec4(texture2D(gaux4, texcoord).r); //gaux1
+	//gl_FragColor = vec4(skyLightColor, 1.0);
 	gl_FragColor = color + bloom_addition * BLOOM_STRENGTH; //screen output
-	//glFragColor = color;
+	//gl_FragColor = bloom_addition; //screen output
 }
