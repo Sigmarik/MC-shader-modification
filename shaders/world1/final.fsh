@@ -4,12 +4,12 @@
 #define BLUR_QUALITY 10 //Number of sample points to use for blurring. Higher quality = higher performance impact! [5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25]
 #define BLOOM_ENABLED 1 //GuEsS wHaT ThIs OpTiOn Is DoInG. [1 0]
 #define BLOOM_STRENGTH 2 //Bloom effect raw multiplier. [1 2 3 4 5 6]
-#define BLOOM_QUALITY 10 //Number of samples algorithm will do. [3 5 10 15 20 25 30]
+#define BLOOM_QUALITY 20 //Number of samples algorithm will do. [3 5 10 15 20 25 30]
 #define BLOOM_COMP_RADIUS 10 //Bloom computation tile size. [5 10 15 20]
 #define BLOOM_SHAPE 1 //Defines what shape bloom rays will take. "Circle" option will make your PC explosive. [0 1 2]
 #define BLOOM_DIVCONST 10 //Defines one thing in bloom equation. [1 3 5 10 15 20]
 #define BLOOM_DISTMUL 10 //Defines another thing in bloom equation. [1 2 3 5 10 15 20]
-#define BLOOM_COLOREXPCONST 0.2 //Defines one more thing in bloom equation. [0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]
+#define BLOOM_COLOREXPCONST 0.1 //Defines one more thing in bloom equation. [0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]
 
 uniform float pixelSizeY;
 uniform float pixelSizeX;
