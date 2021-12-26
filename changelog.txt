@@ -1,0 +1,315 @@
+V2.4.1:
+	* Added config options for the ambient light color in the nether and end
+	* Added waving foliage/leaves support for more mods
+	* Fixed crops waving too slowly
+	* Fixed compiler error on some drivers when using arrays
+	* Removed circular entity shadows, because they cause more problems than they're worth
+	* Fixed clouds not rendering while the player is in water
+
+V2.4.0:
+	* Added waving leaves (disabled by default)
+	* Fixed old clouds
+	* Removed entity.properties because it has a tendency to crash the game
+	* Water fog now draws above the horizon too, like it does in the modded version.
+	* Campfire smoke renders slightly better now
+	* Added support for the new 1.14 flowers
+
+V2.3.0:
+	* Added water waves (the vertex offset kind). Also affects lily pads.
+	* Water colors are now more configurable
+	* Added config option for better beacon beams
+	* Added config option for fog density in every dimension
+	* Added config option for block shade strength
+	* Improved lead rendering
+
+V2.2.3:
+	* Added a config option for water fog color
+	* Added internal compatibility for the clumps mod. It should work properly as soon as optifine back-ports custom entity mappings.
+
+V2.2.2:
+	* Changed water fog color
+	* Weather effects now render on top of the sky
+
+V2.2.0:
+	* Added support for traverse
+	* Transition between held lights and sky/block lights is now smoother
+	* Sea level is now configurable
+	* Possibly fixed obscure issue where setting your brightness to "bright" would make the world a lot brighter than it should be
+
+V2.1.4:
+	* Tweaked nether fog again, now follows an exponential curve instead of an inverse square curve.
+	* Fixed comptibility with storage drawers, and possibly other mods.
+	* Added waving foliage support for forestry, binne mods, pams harvestcraft, and partial support for twilight forest.
+	* Hotfix 1: Fixed phantoms again, because apparently I accadentally undid my previous fix at some point.
+
+V2.1.3:
+	* Nether fog is now more dense near the nether ceiling
+	* Twilight forest auroras are now twice as good and half as laggy
+
+V2.1.2:
+	* Fixed held maps. Again.
+
+V2.1.1:
+	* Added rainbows!
+	* Fixed rainbow XP not working in 1.13
+
+V2.1.0:
+	* Updated to 1.13.1
+	* 1.7 is no longer supported. It may or may not continue to work properly.
+	* Removed ID_FIX
+	* Hand sway no longer applies when holding a map
+	* Held beacons now emit blue light
+
+V2.0.3:
+	* Fixed failure to compile when clear water was disabled in the end
+
+V2.0.2:
+	* Fixed map rendering in item frames
+	* Added workaround for twilight forest progression effects not rendering in front of the sky
+
+V2.0.1:
+	* Water and ice normals and refractions are now configurable separately
+	* Fixed some minor transition issues between regular water and infinite oceans
+	* Hotfix 1: Fixed failure to compile when hardcore darkness was set to moon phase mode
+
+V2.0.0:
+	* Started to make use optifine's custom uniform system for possible performance improvements. More improvements will come once optifine backports vector-type custom uniforms.
+	* Better stained glass is now more faithful to vanilla colors
+	* Stained glass borders are no longer opaque when better stained glass is disabled, as par request of @CatastropheBlack#7707
+	* Added a config option for the opacity of the borders of stained glass for better compatibility with resource packs, as par request of MortalWarden
+	* All blur-related options are now sliders
+	* Added config options for cloud density, as par request of @MastaNub#3311
+	* Tweaked fog and cloud colors at sunset while raining
+
+V1.16.1:
+	* Made beacons even MORE interesting, as par request of @Syntekx#9704. This effect is more visible on colored beacons.
+
+V1.16.0:
+	* Made beacons more interesting
+	* Water refractions are now smaller in the distance, as par request of @sp614x#0888
+	* Sunset color coefficients are now configurable, as par request of @Syntekx#9704
+	* Sun path rotation is now configurable in-game
+	* Various bug fixes, as usual
+
+V1.15.4:
+	* Fixed several issues with water, fog, and infinite oceans.
+	* Hotfix 1: Possibly fixed black screen issue when blur was disabled
+	* Hotfix 2: Attempt #2 to fix black screen issues
+	* Hotfix 3: More bug fixes!
+
+V1.15.3:
+	* Ported vanilla light colors from modded version. Optifine 1.12.2 HD_U_D1 required!
+
+V1.15.2:
+	* Water waves are now slower in the distance, as par @Dragozool#2589's request
+	* Added dithering to the sky in the overworld, which helps with banding issues at sunset.
+	* Added an easter egg :)
+	* Various bug fixes
+
+V1.15.1:
+	* Re-encoded en_US.lang with UTF-8 instead of ISO-8859-1. Hopefully this fixes issues with formatting codes in the shader options menu.
+
+V1.15.0:
+	* Added support for the twilight forest, complete with auroras!
+	* Added config option for hardcore darkness
+	* Made end portals much more configurable
+	* Fixed multiple issues with beacon beams
+
+V1.14.7:
+	* Removed extension GL_EXT_gpu_shader4, since I finally found someone whose GPU was incompatible with it.
+	* Added compatibility for cubic chunks.
+	* Fixed lighting on circular entity shadows again.
+	* Fixed incorrect fog density when looking at terrain through stained glass.
+
+V1.14.6:
+	* Fixed held items not showing enchantment glint
+
+V1.14.5:
+	* Separated underwater fog from regular fog
+	* Enabled optifine's old lighting setting by default, this replaces my hacky SHADE_FIX code.
+	* Overhauled underwater fog colors
+	* Clouds and void clouds now render through end portals
+
+V1.14.4:
+	* Fixed failure to compile when fog was disabled
+	* End portals that are in the end now show the overworld
+	* Moved ambient and block config screens out of the misc. page and into the main page.
+
+V1.14.3:
+	* New effect for end portals
+	* Possibly fixed a compile error on some graphics cards
+	* Hotfix 1: Fixed end portals being invisible when BRIGHT_PORTAL_FIX is enabled
+
+V1.14.2:
+	* Added support for blindness
+	* Added support for some modded blocks (botania, ars magica, and streams so far). If you notice certain "effect blocks" failing to apply their effects (like tallgrass not waving or water not refracting), you'll need to enable block ID fix (under "internal stuff").
+	* Removed nether-vision, since nightvision has been supported for quite a while now.
+	* Added sliders for some config options (for versions of optifine which support it)
+	* Re-enabled end portal effects by default, since the version of optifine that fixes them has been released for MC1.9 and above, and is available as a preview for older versions like 1.7.
+
+V1.14.1:
+	* Fixed fog/sky colors being incorrect during sunset while it's also raining
+	* Block shading is now reduced during rain
+	* Fixed a dumb derp.
+	* Disabled vanilla clouds by default (you can still enable them manually through video settings)
+
+V1.14.0:
+	* Added compatibility for camera being under lava (requires optifine preview HD_U_C2 or later)
+	* Improved sunset colors a bit more
+	* Cloud density now randomly fluctuates with time, so some days will be cloudier than others.
+	* Added depth of field (disabled by default)
+	* Fixed ugly edges on ice when ice scattering is enabled
+	* Fixed minor visual artifact with fog on stained glass in the nether/end
+	* Removed debug mode and LIGHT_FIX options, since neither of them have been used since they were implemented.
+	* Enabled the GL_EXT_gpu_shader4 extension in hopes that I can better optimize my code. If this causes compile errors for anyone let me know and I'll revert it.
+	* Fixed compile errors on some graphics cards
+	* Code cleanups
+
+V1.13.2:
+	* Tweaked sunset colors again
+	* Fancy stars/galaxies now fade out around the moon
+	* The sun/moon now fade out near the horizon when infinite oceans are enabled.
+	* Standard bug fixes and improvements
+
+V1.13.1:
+	* Added config option to bring back the old clouds. This is why we can't have nice things.
+
+V1.13.0: The BIG update 2, the sequel!
+	* Clouds have been massively overhauled to actually look like the type of clouds you'd expect from a high quality shader pack
+	* Added void clouds to the end
+	* Brand new overworld star renderer, complete with galaxies too! (both can be toggled independently)
+	* Removed hacky end portal code, as optifine has now kindly implemented a proper fix for it in HD_U_B9. However, since that version is still in beta, end portal effects have been temporarily disabled by default until it's officially released and back-ported to all supported MC versions.
+	* XP orbs now cycle through the entire color spectrum instead of just yellow and green (configurable). Coincidentally, this has also fixed a few bugs with circular shadows as well.
+	* Improved detection of which hand is currently rendering. It's still not perfect when rapidly rotating your camera while eating/drinking, but at least half of your hand won't think something different from the other half anymore. As such, the COMPAT17 option has been removed.
+	* Generic code improvements and bug fixes, as usual.
+
+V1.12.0:
+	* Improved brightness of fog again
+	* Generic code improvements
+	* Revamped noise algorithms for water refraction/reflection and ice scattering. Both now use new noise functions, water now takes sky access and rain strength into account, and ice scattering now has LOD.
+	* Tweaked sun reflections a bit
+	* Fixed clouds not having volumetric effects behind transparent objects, which caused z-fighting issues in some cases
+
+V1.11.0:
+	* Ender sky effects now apply to end portals too
+	* Ported cross-processing from modded version
+	* Ported wet dirt from modded version
+	* Ported new block alias system from the modded version. Once again, if you notice that tallgrass no longer waves or that water no longer refracts, you'll need to enable ID_FIX to revert to the old system!
+	* Fixed star rendering
+	* Better glass more accurately reflects reality. still not flawless when there are other transparent things in front of or behind it though.
+	* Possibly improved enchantment glow rendering. Still doesn't work with held items, but it should work slightly better with other mobs/players now.
+	* New feature: Can now remove biome coloring on sugar cane (disabled by default)
+	* Reduced block shading underground slightly
+	* Vignette for held lights is now configurable
+	* No longer disabling optifine's native dynamic lights. Do note that it it still not recommended to use both at the same time!
+
+V1.10.1:
+	 * Possibly fixed entity shadows being too bright again. Maybe.
+	 * Improved opacity of clouds: denser areas are now more opaque than less dense areas, the overall opacity has been reduced, and it no longer gets more opaque when raining.
+	 * Fixed some more z-fighting with clouds on water/ice
+	 * Fixed circular shadows thinking that XP orbs were made entirely out of shadows
+	 * Made clear water and bright water separate config options
+
+V1.10.0: The WINDsday update.
+	* Added wind effects to tallgrass
+	* Rain has been overhauled to more accurately simulate wind too. It's also now configurable for those of you who build houses without overhangs on your roofs :P
+	* Some rain effects now no longer apply above cloud height
+	* Fixed circular entity shadows only applying to spiders and endermen. Also made this configurable too.
+	* Added config option that fixes hand sway issues when blocking/eating in old MC versions
+	* Organized the misc. config page
+
+V1.9.0: The ender update!
+	* Added ender nebulae/stars. I hope I can apply this effect to ender portals in the future, but currently that's waiting on a bug fix in optifine.
+	* Tweaked water fog: now green-ish at close range, and blue-ish at far range. Also applies more strongly now so water isn't quite so invisible when used in fountains anymore.
+	* Held end rods now emit purple light
+	* Tweaked overworld cloud colors/opacity again
+	* Entity shadows are now perfectly circular
+
+V1.8.0:
+	* Made sunsets even MORE pretty! (and slightly less overwhelmingly red)
+	* Added some effects to clouds that give them the illusion of being more 3D than they actually are
+	* Reduced brightness of nether-vision, since it was too bright to be useful at close range. Also affects larger radius now.
+	* Fixed fog rendering weirdly with better stained glass
+	* Tweaked water fog color during sunset
+	* Tweaked cloud colors very slightly
+	* Added readme, for people on old MC versions where in-game config options aren't a thing.
+
+V1.7.2:
+	* Added alternate blending method for stained glass which looks much more realistic
+	* Made nether fog/sky get brighter every now and then
+
+V1.7.1:
+	* Fixed dark stripy patterns appearing on water in older MC versions
+	* Fixed spiders and endermen being too bright
+	* Fixed entity shadows being too bright
+	* Fixed grass becoming too red under certain circumstances
+
+V1.7.0:
+	* Added nether-vision, a workaround for shaders not supporting night vision. (activate by holding a nether star)
+	* Reduced blur in several places to improve framerate
+	* Buffed dynamic lights in the nether
+	* Water fog color is now darker at night
+
+V1.6.0: The BIG update!
+	* Added clouds! Attempt number 1: They look quite minecrafty and square at the moment. I will probably tweak them many times in the future, but the framework for them is now in place.
+	* Finally fixed transparent stuff not rendering through water
+	* Revamped held lighting system: different items now emit different colors of light, and some items will also flicker with time. Additionally, zooming in with optifine now increases the distance held lights are effective for.
+	* Enabled hand sway by default
+	* Sunset fog colors are now less overwhelming when it rains
+	* Improved shadow colors at sunset (now matches the color of the sunset instead of being always blue-tinted)
+	* Fixed border between oceans and infinite oceans being visible when refraction is disabled
+
+V1.5.0:
+	* Improved ocean/infinite ocean rendering, the border between them should now be even more invisible
+	* Fixed ugly fog colors below the horizon when infinite oceans are disabled
+	* Fog colors now adjust to darkness faster
+	* Improved brightness of fog again
+	* Tweaked underwater fog color
+	* Made hands slightly less boring
+
+V1.4.0:
+	* Added LODs to water reflections. No more super pixelated sun reflections at sunset!
+	* Glass and ice are now half as reflective as water.
+	* Water blur now depends on fog density, which means that infinite oceans no longer calculate excessive blur when they don't have to.
+	* Fixed incorrect blur values during rain. Maybe. No idea if this was even an issue before I tweaked a bunch of other stuff.
+	* Various other tweaks/improvements.
+
+V1.3.0:
+	* Changes/improvements:
+	* Sunsets are now redder
+	* Held lights now follow the 1/dist^2 rule slightly more accurately, which further reduces the "circle that follows you" effect.
+	* Improved fog colors based on brightness some more, dark fog should now only apply to being in a cave, and not to being in a house.
+	* Cobwebs no longer have shadows.
+	* Dead bushes are no longer affected by grass patches.
+
+	* Bug fixes:
+	* Fixed the horizon separating from the rest of the sky when rotating your camera rapidly during sunset. This is a temporary fix for a bug in optifine. Once it does get get fixed on optifine's end, I'll leave this code in but disabled by default for people playing in old MC versions.
+	* Fixed water fog getting applied twice when underwater and looking at water.
+	* Fixed several minor visual artifacts related to desaturation. Also added desaturation data to debug mode output.
+	* Fixed several major visual artifacts on water with clear water disabled (I really should have tested this better)
+	* Fixed fog not applying to hand during rain (since fog density is positive during rain, even at 0 distance)
+
+V1.2.2:
+	* Fixed compile issues on some graphics cards
+	* Fixed water having an identity crisis
+	* Fixed more flickering on lava. Again.
+	* Fixed incorrect fog/sky colors underground
+
+V1.2.1 hotfix:
+	* Fixed some artifacts related to new fog rendering algorithm. Fog should now work correctly through transparent blocks.
+	* Fixed normals of lava not getting set, causing flickering issues.
+
+V1.2.0:
+	* Sun now reflects off of ice/glass, even in your hand!
+	* Fog is now calculated more accurately for water that isn't part of the ocean. The down side of this is that infinite oceans look... well, different. You can decide for yourself if they're better or worse.
+	* Clear water now also controls weather or not to overwrite water's texture with 0% opacity
+	* Added desaturation to the end
+	* General bug fixes/improvements
+
+V1.1.0:
+	* Added nether and end shaders (no more infinite oceans outside the overworld!)
+	* Added some effects to lava
+	* Improved block detection for water/lava on old minecraft versions
+
+V1.0.0:
+	* Initial release: re-coded my original version from scratch. Many effects are temporarily removed until I figure out how to make them not quite so laggy.

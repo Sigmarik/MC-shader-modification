@@ -1,0 +1,1 @@
+blockLightColor = mix(vec3(1.5, 0.75, 0.25), vec3(1.4, 1.1, 0.8), eyeBrightnessSmooth.x / 240.0);
