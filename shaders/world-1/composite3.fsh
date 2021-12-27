@@ -7,6 +7,7 @@ uniform float pixelSizeX;
 uniform float viewWidth;
 uniform sampler2D gaux2; //output from previous stage
 uniform sampler2D gaux1;
+uniform sampler2D gcolor;
 
 varying vec2 texcoord;
 

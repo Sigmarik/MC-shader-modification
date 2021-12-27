@@ -3,7 +3,7 @@
 #define BLUR_ENABLED //Is blur enabled at all?
 #define BLUR_QUALITY 10 //Number of sample points to use for blurring. Higher quality = higher performance impact! [5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25]
 #define BLOOM_ENABLED 1 //GuEsS wHaT ThIs OpTiOn Is DoInG. [1 0]
-#define BLOOM_STRENGTH 2 //Bloom effect raw multiplier. [1 2 3 4 5 6]
+#define BLOOM_STRENGTH 1.0 //Bloom effect raw multiplier. [0.1 0.3 0.5 0.7 1.0 2.0 3.0 4.0 5.0 6.0]
 #define BLOOM_QUALITY 20 //Number of samples algorithm will do. [3 5 10 15 20 25 30]
 #define BLOOM_COMP_RADIUS 10 //Bloom computation tile size. [5 10 15 20]
 #define BLOOM_SHAPE 1 //Defines what shape bloom rays will take. "Circle" option will make your PC explosive. [0 1 2]
