@@ -1,17 +1,14 @@
 #version 120
 
-#define BLUR_ENABLED //Is blur enabled at all?
-#define BLUR_QUALITY 10 //Number of sample points to use for blurring. Higher quality = higher performance impact! [5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25]
-
-uniform float pixelSizeX;
-uniform float viewWidth;
-uniform sampler2D gaux2; //output from previous stage
-uniform sampler2D gaux1;
-
 varying vec2 texcoord;
 
+uniform sampler2D depthtex0;
+uniform mat4 gbufferModelViewInverse;
+
 void main() {
-	vec4 color = max(texture2D(gaux2, texcoord), texture2D(gaux1, texcoord));
-/* DRAWBUFFERS:7 */
-	gl_FragData[0] = color; //gaux4
+    float depth = texture2D(depthtex0, texcoord).r;
+    vec3 view_pos = vec3(texcoord, depth);
+    /* DRAWBUFFERS:8 */
+    gl_FragData[0] = texture2D(depthtex0, texcoord) / 100.0;
+    //gl_FradData[0] = vec4(depth / 100.0, 0.0, 0.0, 1.0);
 }

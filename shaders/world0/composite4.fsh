@@ -1,7 +1,5 @@
 #version 120
 
-#define BLUR_ENABLED //Is blur enabled at all?
-#define BLUR_QUALITY 10 //Number of sample points to use for blurring. Higher quality = higher performance impact! [5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25]
 #define BLOOM_ENABLED 1 //GuEsS wHaT ThIs OpTiOn Is DoInG. [1 0]
 #define BLOOM_STRENGTH 1.0 //Bloom effect raw multiplier. [0.1 0.3 0.5 0.7 1.0 2.0 3.0 4.0 5.0 6.0]
 #define BLOOM_QUALITY 20 //Number of samples algorithm will do. [3 5 10 15 20 25 30]
@@ -13,22 +11,18 @@
 #define BLOOM_COLOR_EXPONENT 4 //Defines semi-contrast of the bloom. [1 2 3 4 5 6]
 #define BLOOM_FUNCTION_TYPE 0 //Bloom brightness function. Non-exponent functions will not take in consideration bloom parameters. [0 1 2]
 
-uniform float pixelSizeY;
 uniform float pixelSizeX;
-uniform float viewHeight;
+uniform float pixelSizeY;
+uniform float viewWidth;
+uniform sampler2D gaux2; //output from previous stage
 uniform sampler2D gaux1;
-uniform sampler2D gaux2;
-uniform sampler2D gaux4;
-uniform sampler2D lightmap;
-//const mat4 TEXTURE_MATRIX_2;
-uniform sampler2D composite; //output from previous stage
+uniform sampler2D gcolor;
+uniform sampler2D composite;
 
 varying vec2 texcoord;
 
-float fogify(float x, float width) {
-	//fast, vaguely bell curve-shaped function with variable width
-	return width / (x * x + width);
-}
+varying vec3 skyLightColor;
+varying float skyBrightness;
 
 vec4 get_ll(vec2 pos) {
 	return max(texture2D(gaux2, texcoord), texture2D(gaux1, texcoord));
@@ -58,33 +52,8 @@ float bloom_brightness(float distance) {
 #endif
 
 void main() {
-	vec4 color = texture2D(composite, texcoord);
-
-	#ifdef BLUR_ENABLED
-		float blurRadius = 1.0 - color.a;
-		if (blurRadius > 0.0) {
-			float invBlurRadius1 = 1.0 / blurRadius;
-			blurRadius *= 256.0; //actual radius in pixels
-			float invBlurRadius2 = 1.0 / blurRadius;
-
-			vec4 average = vec4(0.0);
-			float start  = max(texcoord.y - blurRadius * pixelSizeY,       pixelSizeY * 0.5);
-			float finish = min(texcoord.y + blurRadius * pixelSizeY, 1.0 - pixelSizeY * 0.5);
-			float step   = max(pixelSizeY * 0.5, blurRadius * pixelSizeY / float(BLUR_QUALITY));
-
-			for (float y = start; y <= finish; y += step) {
-				float weight = fogify(((texcoord.y - y) * viewHeight) * invBlurRadius2, 0.35);
-				vec4 newColor = texture2D(composite, vec2(texcoord.x, y));
-				weight *= (1.0 - newColor.a) * invBlurRadius1;
-				average.rgb += newColor.rgb * newColor.rgb * weight;
-				average.a += weight;
-			}
-			color.rgb = sqrt(average.rgb / average.a);
-		}
-	#endif
-
+	vec4 light_level = max(texture2D(gaux2, texcoord), texture2D(gaux1, texcoord));
 	vec4 bloom_addition = vec4(0.0);
-	float skyBrightness = 0.0;
 	#if BLOOM_ENABLED
 		float bloom_radius = BLOOM_COMP_RADIUS;
 		float bloom_step_x = (bloom_radius * pixelSizeX * 2) / BLOOM_QUALITY;
@@ -172,7 +141,6 @@ void main() {
 			}
 		#endif
 	#endif
-	//float dst = sqrt(texcoord.x * texcoord.x + texcoord.y * texcoord.y);
-	gl_FragColor = color + bloom_addition * BLOOM_STRENGTH; //screen output
-	//glFragColor = color;
+/* DRAWBUFFERS:7 */
+	gl_FragData[0] = bloom_addition * BLOOM_STRENGTH; //gaux4
 }
