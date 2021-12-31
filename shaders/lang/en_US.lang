@@ -56,6 +56,7 @@ option.BLOOM_FUNCTION_TYPE=Bloom F(d)
 value.BLOOM_FUNCTION_TYPE.0=Exponential
 value.BLOOM_FUNCTION_TYPE.1=Linear
 value.BLOOM_FUNCTION_TYPE.2=Gaussian
+option.BLOOM_GAUSSIAN_DIVISOR=Gaussian divisor
 
 screen.BLUR.comment=Blur effects
 option.BLUR_ENABLED=Enable Blur

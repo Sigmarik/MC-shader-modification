@@ -12,6 +12,7 @@
 #define BLOOM_COLOREXPCONST 0.1 //Defines one more thing in bloom equation. [0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]
 #define BLOOM_COLOR_EXPONENT 4 //Defines semi-contrast of the bloom. [1 2 3 4 5 6]
 #define BLOOM_FUNCTION_TYPE 0 //Bloom brightness function. Non-exponent functions will not take in consideration bloom parameters. [0 1 2]
+#define BLOOM_GAUSSIAN_DIVISOR 10 //Bloom parameter. Affects only gaussian bloom type. [1 5 10 20 25 36]
 
 uniform float pixelSizeY;
 uniform float pixelSizeX;
@@ -53,7 +54,7 @@ float bloom_brightness(float distance) {
 #endif
 #if BLOOM_FUNCTION_TYPE == 2
 float bloom_brightness(float distance) {
-	return (1.0 / pow(BLOOM_DIVCONST, distance / BLOOM_DISTMUL));
+	return (1.0 / pow(BLOOM_DIVCONST, (distance * distance / BLOOM_GAUSSIAN_DIVISOR) / BLOOM_DISTMUL));
 }
 #endif
 
