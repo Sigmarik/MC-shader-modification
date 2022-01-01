@@ -18,6 +18,7 @@ uniform float viewWidth;
 uniform sampler2D gaux2; //output from previous stage
 uniform sampler2D gaux1;
 uniform sampler2D gcolor;
+uniform sampler2D colortex8;
 uniform sampler2D composite;
 
 varying vec2 texcoord;

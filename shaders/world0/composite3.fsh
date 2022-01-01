@@ -6,7 +6,6 @@
 #define HEIGHT_FOG_DISTORTION -0.02 //Defines how sharp for transition is. [-0.01 -0.02 -0.03 -0.05 -0.1 -0.2 -0.4 -0.7 -1]
 #define HEIGHT_FOG_DENCITY 0.5 //General height fog dencity multiplyer. [0.1 0.3 0.5 0.7 1.0 1.2 1.3 1.5 1.7 2.0 2.5 3.0 3.5 5.0]
 #define HEIGHT_FOG_CAVE_FIX 1 //Tryes to disable height fog in caves [0 1]
-#define H_FOG_FIX_CLIP_LIGHT 2 //Light level at which area considered to be a cave. [1 2 3 4 5 6 7 8 9 10 11 12 13 14]
 #define H_FOG_FIX_SIGM_K -10.0 //Sigmoid coefficient. It is a bit hard to explain, just tweak it and see what happens in caves. [-1.0 -2.0 -5.0 -10.0 -15.0 -20.0]
 
 varying vec2 texcoord;
@@ -21,12 +20,7 @@ const float fog_k = -0.02;
 #if HEIGHT_FOG_ENABLED
 
 #if HEIGHT_FOG_CAVE_FIX == 1
-uniform sampler2D gaux1;
-uniform sampler2D gaux2;
-
-vec4 get_ll(vec2 pos) {
-	return max(texture2D(gaux2, pos), texture2D(gaux1, pos));
-}
+uniform ivec2 eyeBrightness;
 #endif
 
 float fog_dencity(float height) {
@@ -52,7 +46,7 @@ void main() {
     float mean_dencity = (sum_dencity(max_h) - sum_dencity(min_h)) / (max_h - min_h);
     float dencity = min(400.0, mean_dencity * length(world_space));
     #if HEIGHT_FOG_CAVE_FIX
-    dencity /= 1 + pow(2.718, H_FOG_FIX_SIGM_K * (get_ll(texcoord).y - float(H_FOG_FIX_CLIP_LIGHT) / 15.0));
+    dencity /= 1 + pow(2.718, H_FOG_FIX_SIGM_K * (eyeBrightness.y - 14.0/15.0));
     #endif
     /* DRAWBUFFERS:8 */
     gl_FragData[0] = vec4(HEIGHT_FOG_DENCITY * dencity / 100);
