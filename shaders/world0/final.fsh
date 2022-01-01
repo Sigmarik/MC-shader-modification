@@ -21,6 +21,7 @@ uniform sampler2D colortex5;
 uniform sampler2D colortex8;
 //const mat4 TEXTURE_MATRIX_2;
 uniform sampler2D composite; //output from previous stage
+uniform vec3 fogColor;
 
 varying vec2 texcoord;
 varying vec3 skyLightColor;
@@ -57,5 +58,11 @@ void main() {
 		}
 	#endif
 
-	gl_FragColor = color + texture2D(gaux4, texcoord);
+	vec4 raw_fog_data = texture2D(colortex8, texcoord);
+
+	color = color + texture2D(gaux4, texcoord);
+
+	color = color * (1 - clamp(raw_fog_data.w, 0.0, 1.0)) + vec4(fogColor, 1.0) * clamp(raw_fog_data.w, 0.0, 1.0);
+
+	gl_FragColor = color;//color + texture2D(gaux4, texcoord);
 }

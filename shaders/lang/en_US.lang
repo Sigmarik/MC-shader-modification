@@ -35,7 +35,6 @@ option.UNDERWATER_FOG=Underwater Fog
 option.CLEAR_WATER=Clear Water
 option.BRIGHT_WATER=Bright Water
 
-screen.BLUR=Blur
 screen.BLOOM=Bloom
 option.BLOOM_ENABLED=Bloom
 value.BLOOM_ENABLED.1=ON
@@ -58,6 +57,20 @@ value.BLOOM_FUNCTION_TYPE.1=Linear
 value.BLOOM_FUNCTION_TYPE.2=Gaussian
 option.BLOOM_GAUSSIAN_DIVISOR=Gaussian divisor
 
+screen.EX_FOG=Height fog
+option.HEIGHT_FOG_ENABLED=H. fog enabled 
+value.HEIGHT_FOG_ENABLED.1=ON
+value.HEIGHT_FOG_ENABLED.0=§cOFF
+option.HEIGHT_FOG_SEA_LEVEL=Sea level
+option.HEIGHT_FOG_DISTORTION=Fog distortion
+option.HEIGHT_FOG_DENCITY=Fog dencity
+option.HEIGHT_FOG_CAVE_FIX=Cave fix
+value.HEIGHT_FOG_CAVE_FIX.1=ON
+value.HEIGHT_FOG_CAVE_FIX.0=§cOFF
+option.H_FOG_FIX_CLIP_LIGHT=Cave fix clip
+option.H_FOG_FIX_SIGM_K=Sigmoid K
+
+screen.BLUR=Blur
 screen.BLUR.comment=Blur effects
 option.BLUR_ENABLED=Enable Blur
 option.BLUR_QUALITY=Blur Samples
