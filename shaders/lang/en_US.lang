@@ -69,6 +69,8 @@ value.HEIGHT_FOG_CAVE_FIX.1=ON
 value.HEIGHT_FOG_CAVE_FIX.0=§cOFF
 option.H_FOG_FIX_CLIP_LIGHT=Cave fix clip
 option.H_FOG_FIX_SIGM_K=Sigmoid K
+option.HEIGHT_FOG_RAIN_MULTIPLIER=Rain mult
+option.H_FOG_MAX_DENCITY=Cave fog dencity
 
 screen.BLUR=Blur
 screen.BLUR.comment=Blur effects
